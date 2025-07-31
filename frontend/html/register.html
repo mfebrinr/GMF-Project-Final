@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Daftar Akun - Monitoring Kalibrasi</title>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+  <header class="auth-header">
+    <a href="index.html" class="auth-header-brand-link">
+        <div class="navbar-brand">
+            <img src="../gambar/logo.png" alt="Logo" class="navbar-logo-modern" />
+            <span class="navbar-title">Kalibrasi Alat</span>
+        </div>
+    </a>
+  </header>
+
+  <main class="auth-page-container">
+    <div class="auth-card">
+        <h2>Buat Akun Baru</h2>
+        <p class="auth-subtitle">Isi detail di bawah ini untuk memulai.</p>
+
+        <form id="registerForm" autocomplete="off" novalidate>
+            <div class="form-group">
+                <label for="regId">ID Pegawai</label>
+                <input type="text" id="regId" name="id" required>
+                <div class="error-field" id="errorId"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="regUsername">Username</label>
+                <input type="text" id="regUsername" name="username" required>
+                <div class="error-field" id="errorUsername"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="regPassword">Password</label>
+              <div class="password-input-wrapper">
+                  <input type="password" id="regPassword" name="password" required>
+                  <i class="fa-solid fa-eye toggle-password" id="togglePassword"></i>
+              </div>
+              <div class="error-field" id="errorPassword"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="regPhone">Nomor HP</label>
+                <input type="tel" id="regPhone" name="phone" required>
+                <div class="error-field" id="errorPhone"></div>
+            </div>
+
+            <button type="submit" id="registerButton" class="btn-primary">Daftar Akun</button>
+            <div id="registerMessage" class="login-message"></div>
+        </form>
+
+        <div class="auth-link">
+            Sudah punya akun? <a href="index.html">Login di sini</a>
+        </div>
+    </div>
+  </main>
+
+  <script src="../js/register.js"></script>
+</body>
+</html>

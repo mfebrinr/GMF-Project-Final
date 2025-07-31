@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manajemen Alat</title>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="icon" type="image/png" href="../gambar/favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar-modern">
+      <div class="navbar-brand">
+          <img src="../gambar/logo.png" alt="Logo" class="navbar-logo-modern" />
+          <span class="navbar-title">Kalibrasi Alat</span>
+      </div>
+
+      <div class="navbar-links" id="navLinks">
+          <a href="dashboard.html" class="nav-link" id="nav-dashboard">Dashboard</a>
+          <a href="alat.html" class="nav-link" id="nav-alat">Tools</a>
+      </div>
+
+      <div class="navbar-user-section">
+          <div class="user-dropdown-modern">
+              <div class="user-info" id="userDropdownTrigger">
+                  <span class="user-avatar" id="navUserAvatar"></span>
+                  <span id="loggedInUser" class="username-display">Pengguna</span>
+                  <span class="dropdown-arrow">▼</span>
+              </div>
+              <div class="dropdown-content-modern" id="userDropdownContent">
+                  <a href="profile.html"><i class="fa-solid fa-user-gear"></i> Profil Saya</a>
+                  <div class="dropdown-divider"></div>
+                  <a href="#" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+              </div>
+          </div>
+      </div>
+      
+      <button class="hamburger-menu" id="hamburgerBtn">
+          <i class="fa-solid fa-bars"></i>
+      </button>
+  </nav>
+
+  <div class="notification" id="notificationBox"></div>
+
+  <main class="content-container">
+    <div class="main-card">
+      <div class="card-header-tools">
+        <h2 class="tools-title">Manajemen Data Alat</h2>
+        <div class="tools-actions">
+          <input type="text" id="searchInput" placeholder="Cari alat..." class="search-input-modern" />
+          <select id="statusFilter" class="filter-select">
+            <option value="semua">Semua Status</option>
+            <option value="-">Standar</option>
+            <option value="Proses">Proses</option>
+            <option value="Selesai">Selesai</option>
+          </select>
+          <button id="btnTambahAlat" class="btn-primary"><i class="fa-solid fa-plus"></i> Tambah Alat</button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="table-wrapper">
+          <table id="alatTable" class="data-table">
+            <thead>
+              <tr>
+                <th>Registration</th>
+                <th>Description</th>
+                <th>Merk</th>
+                <th>Model</th>
+                <th>P/N</th>
+                <th>S/N</th>
+                <th>Unit</th>
+                <th>Unit Desc</th>
+                <th>Location</th>
+                <th>Next Due</th>
+                <th>Tenggat Waktu</th>
+                <th>Status Proses</th>
+                <th>Lama Kalibrasi</th>
+                <th>Tanggal Selesai</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div id="emptyState" class="empty-state hidden">
+          <img src="../gambar/box.png" alt="Kotak Kosong" class="empty-state-img">
+          <h3>Tidak Ada Data Ditemukan</h3>
+          <p>Data yang Anda cari tidak ada. Coba ubah filter atau kata kunci pencarian Anda.</p>
+        </div>
+        <div class="pagination-container">
+            <div id="paginationInfo">Menampilkan 0 dari 0 alat</div>
+            <div class="pagination" id="pagination"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div class="modal-overlay hidden" id="alatModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title">Tambah Alat Baru</h3>
+        <button class="modal-close-btn" data-modal-id="alatModal">&times;</button>
+      </div>
+      <form id="alatForm">
+        <div class="modal-body">
+          <div class="form-grid">
+            <input type="text" id="registration" placeholder="Registration" required>
+            <input type="text" id="description" placeholder="Description" required>
+            <input type="text" id="merk" placeholder="Merk">
+            <input type="text" id="model" placeholder="Model">
+            <input type="text" id="pn" placeholder="P/N">
+            <input type="text" id="sn" placeholder="S/N">
+            <input type="text" id="unit" placeholder="Unit">
+            <input type="text" id="unitDesc" placeholder="Unit Desc">
+            <input type="text" id="location" placeholder="Location">
+            <div class="form-group-date">
+              <label for="nextDue">Next Due Date</label>
+              <input type="date" id="nextDue" required>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" data-modal-id="alatModal">Batal</button>
+          <button type="submit" id ="saveAlatButton" class="btn-primary">Simpan Alat</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-overlay hidden" id="editModal">
+    <div class="modal-box">
+        <div class="modal-header">
+            <h3 class="modal-title">Edit Data Alat</h3>
+            <button class="modal-close-btn" data-modal-id="editModal">&times;</button>
+        </div>
+        <form id="editForm">
+            <div class="modal-body">
+                <div class="form-grid">
+                    <input type="text" id="editRegistration" placeholder="Registration" required>
+                    <input type="text" id="editDescription" placeholder="Description" required>
+                    <input type="text" id="editMerk" placeholder="Merk">
+                    <input type="text" id="editModel" placeholder="Model">
+                    <input type="text" id="editPn" placeholder="P/N">
+                    <input type="text" id="editSn" placeholder="S/N">
+                    <input type="text" id="editUnit" placeholder="Unit">
+                    <input type="text" id="editUnitDesc" placeholder="Unit Desc">
+                    <input type="text" id="editLocation" placeholder="Location">
+                    <div class="form-group-date">
+                        <label for="editNextDue">Next Due Date</label>
+                        <input type="date" id="editNextDue" required>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" data-modal-id="editModal">Batal</button>
+                <button type="submit" id="updateAlatButton" class="btn-primary">Simpan Perubahan</button>
+            </div>
+        </form>
+    </div>
+  </div>
+
+  <div class="modal-overlay hidden" id="kalibrasiModal">
+    <div class="modal-box" style="max-width: 450px;">
+      <div class="modal-header">
+          <h3 class="modal-title">Proses Kalibrasi Alat</h3>
+          <button class="modal-close-btn" data-modal-id="kalibrasiModal">&times;</button>
+      </div>
+      <form id="kalibrasiForm">
+          <div class="modal-body">
+              <div class="form-group">
+                  <label for="kalMulai">Tanggal Mulai Kalibrasi</label>
+                  <input type="date" id="kalMulai" required>
+              </div>
+              <div class="form-group">
+                  <label for="kalSelesai">Estimasi Tanggal Selesai</label>
+                  <input type="date" id="kalSelesai" required>
+              </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn-secondary" data-modal-id="kalibrasiModal">Batal</button>
+              <button type="submit" class="btn-primary">Mulai Proses</button>
+          </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-overlay hidden" id="deleteAlatModal">
+    <div class="modal-box" style="max-width: 450px;">
+      <div class="modal-header-delete">
+        <div class="delete-icon"><i class="fa-solid fa-trash-can"></i></div>
+      </div>
+      <div class="modal-body" style="text-align: center;">
+        <h3 class="modal-title-delete">Hapus Alat Ini?</h3>
+        <p>Apakah Anda yakin ingin menghapus alat <strong id="namaAlatDihapus"></strong>? Tindakan ini tidak dapat diurungkan.</p>
+      </div>
+      <div class="modal-footer-delete">
+        <button type="button" class="btn-secondary" data-modal-id="deleteAlatModal">Batal</button>
+        <button type="button" id="confirmDeleteAlatBtn" class="btn-danger">Ya, Hapus</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/alat.js"></script>
+    <script src="../js/navbar.js"></script>
+</body>
+</html>

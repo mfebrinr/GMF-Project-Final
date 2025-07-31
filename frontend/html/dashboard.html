@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard Kalibrasi</title>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <nav class="navbar-modern">
+      <div class="navbar-brand">
+          <img src="../gambar/logo.png" alt="Logo" class="navbar-logo-modern" />
+          <span class="navbar-title">Kalibrasi Alat</span>
+      </div>
+
+      <div class="navbar-links" id="navLinks">
+          <a href="dashboard.html" class="nav-link" id="nav-dashboard">Dashboard</a>
+          <a href="alat.html" class="nav-link" id="nav-alat">Tools</a>
+      </div>
+
+      <div class="navbar-user-section">
+          <div class="user-dropdown-modern">
+              <div class="user-info" id="userDropdownTrigger">
+                  <span class="user-avatar" id="navUserAvatar"></span>
+                  <span id="loggedInUser" class="username-display">Pengguna</span>
+                  <span class="dropdown-arrow">▼</span>
+              </div>
+              <div class="dropdown-content-modern" id="userDropdownContent">
+                  <a href="profile.html"><i class="fa-solid fa-user-gear"></i> Profil Saya</a>
+                  <div class="dropdown-divider"></div>
+                  <a href="#" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+              </div>
+          </div>
+      </div>
+      
+      <button class="hamburger-menu" id="hamburgerBtn">
+          <i class="fa-solid fa-bars"></i>
+      </button>
+  </nav>
+
+  <main class="dashboard-container">
+
+    <div class="stat-cards-grid">
+      <div class="stat-card">
+        <h3>Total Alat</h3>
+        <p id="statTotalAlat">0</p>
+        <div class="stat-card-icon icon-total">🧰</div>
+      </div>
+      <div class="stat-card">
+        <h3>Proses Kalibrasi</h3>
+        <p id="statProses">0</p>
+        <div class="stat-card-icon icon-proses">⚙️</div>
+      </div>
+      <div class="stat-card">
+        <h3>Segera Jatuh Tempo</h3>
+        <p id="statSegeraJatuhTempo">0</p>
+        <div class="stat-card-icon icon-segera">🟡</div>
+      </div>
+      <div class="stat-card">
+        <h3>Lewat Tenggat</h3>
+        <p id="statLewatTenggat">0</p>
+        <div class="stat-card-icon icon-lewat">🔴</div>
+      </div>
+    </div>
+
+    <div class="main-grid">
+        <div class="card card-full">
+            <div class="card-header">
+                <h3>Alat Selesai Dikalibrasi (Rekap Bulanan)</h3>
+                <div class="chart-controls">
+                    <select id="bulanFilter" class="filter-select"></select>
+                    <select id="tahunFilter" class="filter-select"></select>
+                </div>
+            </div>
+            <div class="chart-container">
+                <canvas id="grafikKalibrasi"></canvas>
+            </div>
+        </div>
+    </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3>Jadwal Kalibrasi Terdekat</h3>
+          <a href="alat.html" class="card-link">Lihat Semua</a>
+        </div>
+        <div class="table-section">
+          <table id="jadwalKalibrasiTable" class="data-table">
+            <thead>
+              <tr>
+                <th>Nama Alat</th>
+                <th>Next Due</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3>Alat dalam Proses Kalibrasi</h3>
+          <a href="alat.html" class="card-link">Lihat Semua</a>
+        </div>
+        <div class="table-section">
+          <table id="statusKalibrasiTable" class="data-table">
+            <thead>
+              <tr>
+                <th>Nama Alat</th>
+                <th>Estimasi Selesai</th>
+                <th>Sisa Waktu</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="../js/dashboard.js"></script>
+    <script src="../js/navbar.js"></script>
+</body>
+</html>
